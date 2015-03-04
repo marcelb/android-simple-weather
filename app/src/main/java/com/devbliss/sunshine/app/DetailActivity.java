@@ -1,20 +1,23 @@
 package com.devbliss.sunshine.app;
 
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity {
+
+    private ShareActionProvider mShareActionProvider;
+    protected String shareText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +30,28 @@ public class DetailActivity extends ActionBarActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detail, menu);
+
+        // Get the menu item.
+        MenuItem menuItem = menu.findItem(R.id.share);
+        // Get the provider and hold onto it to set/change the share intent.
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+
+        /** Setting a share intent */
+        mShareActionProvider.setShareIntent(getDefaultShareIntent());
+
         return true;
+    }
+
+    /** Returns a share intent */
+    private Intent getDefaultShareIntent(){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,getIntent().getStringExtra(Intent.EXTRA_TEXT));
+        return intent;
     }
 
     @Override
