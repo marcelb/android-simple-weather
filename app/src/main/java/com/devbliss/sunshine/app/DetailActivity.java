@@ -16,8 +16,9 @@ import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
 
+    public static final String SUNSHINE_APP_TAG = " #SunshineApp";
     private ShareActionProvider mShareActionProvider;
-    protected String shareText;
+    private String mShareText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,9 @@ public class DetailActivity extends ActionBarActivity {
     /** Returns a share intent */
     private Intent getDefaultShareIntent(){
         Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,getIntent().getStringExtra(Intent.EXTRA_TEXT));
+        intent.putExtra(Intent.EXTRA_TEXT,getIntent().getStringExtra(Intent.EXTRA_TEXT)+ SUNSHINE_APP_TAG);
         return intent;
     }
 
