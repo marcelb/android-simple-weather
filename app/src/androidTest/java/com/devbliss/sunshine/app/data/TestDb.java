@@ -197,7 +197,6 @@ public class TestDb extends AndroidTestCase {
         assertTrue(locationRowId != -1);
 
         // Move the cursor to a valid database row
-
         cursor.moveToNext();
 
         // Validate data in resulting Cursor with the original ContentValues
