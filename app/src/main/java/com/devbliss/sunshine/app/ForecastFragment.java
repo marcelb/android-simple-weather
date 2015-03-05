@@ -120,8 +120,6 @@ public class ForecastFragment extends Fragment {
                 String unitPref = prefs.getString(getString(R.string.pref_units_key),getString(R.string.pref_units_metric));
                 String unitMetric = getString(R.string.pref_units_metric);
 
-                Log.v(LOG_TAG, "unittype = "+unitPref+" vs. "+unitMetric);
-
                 return WeatherDataParser.getWeatherDataFromJson(getWeatherForecast(params[0]), 7, unitPref.equals(unitMetric) ? WeatherDataParser.Unit.METRIC : WeatherDataParser.Unit.IMPERIAL);
             } catch (JSONException e) {
                 e.printStackTrace();
