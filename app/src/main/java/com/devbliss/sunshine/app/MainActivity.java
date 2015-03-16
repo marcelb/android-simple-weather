@@ -87,7 +87,8 @@ public class MainActivity extends ActionBarActivity {
 //            builder.encodedPath("geo:0,0");
 //            builder.appendQueryParameter("q",prefs.getString(getString(R.string.pref_location_key),getString(R.string.pref_location_default)));
 //            showMap(builder.build());
-            showMap(Uri.parse("geo:0,0?q="+prefs.getString(getString(R.string.pref_location_key),getString(R.string.pref_location_default))));
+            String location = Utility.getPreferredLocation(this);
+            showMap(Uri.parse("geo:0,0?q="+location));
             return true;
         }
 
